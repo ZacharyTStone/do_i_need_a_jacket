@@ -12,6 +12,10 @@ let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 // Get weather info from API
 
 async function getWeatherData(baseURL, zipcode, APIKey) {
+    // makes a fetch request to the api url and saves the response (await means it doesn't move on till it is complete)
+    const response = await fetch(baseURL + city + key);
+    // save that response as a json file
+    const data = await response.json();
 
 }
 // test
