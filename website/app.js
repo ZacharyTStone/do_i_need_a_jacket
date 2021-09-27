@@ -1,7 +1,7 @@
 /* Global Variables */
 // API URL/Key
 const baseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
-const APIKey = "&appid=f0e2f2fd5311df4ea9bdff1d071ad35e";
+const APIKey = ",us&appid=f0e2f2fd5311df4ea9bdff1d071ad35e";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -25,10 +25,10 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
             city: data.name,
             country: data.sys.country,
             temp: data.main.temp,
+            humidity: data.main.humidity,
             feelslike: data.main.feelslike,
             description: data.weather[0].description,
             icon: data.weather[0].icon,
-            humidity: data.main.humidity,
         };
 
     } catch (error) {
@@ -37,13 +37,13 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
 
 };
 
-// POST weather data to server.js
+// POST weather data to server.js using whatever url you pick
 async function postData(url = '', data = {}) {
     // awaits the url to be fetched and saves everything as the response to give to the server
     const res = await fetch(url, {
         // POST Method
         method: 'POST',
-        // default value not safe
+        // default value (not safe)
         credentials: 'same-origin',
         // what will be posted
         headers: {
@@ -56,8 +56,8 @@ async function postData(url = '', data = {}) {
         // try to return the response 
         const getData = await res.json();
         return getData;
-    } catch (error) {
-        console.log("Error:could not post anything to server.js", error);
+    } catch {
+        console.log("Error:could not post anything to server.js");
     };
 };
 
@@ -66,4 +66,9 @@ async function postData(url = '', data = {}) {
 
 // main functions
 
-getWeatherData(baseURL, 19128, APIKey);
+
+getWeatherData(baseURL, 19128, APIKey).then(data => {
+    postData('/add', {
+        data: data,
+    });
+});

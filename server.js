@@ -32,3 +32,11 @@ app.use(express.static('website'));
 
 
 // Setup Server
+
+// when the app.js makes a post request
+app.post('/add', (req, res) => {
+    const entry = req.body;
+    projectData = entry;
+    res.json(projectData);
+    console.log(projectData)
+});
