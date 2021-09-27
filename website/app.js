@@ -10,6 +10,7 @@ let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
 const dateDiv = document.getElementById("date");
 const tempDiv = document.getElementById("temp");
 const contentDiv = document.getElementById("content");
+const generateButton = document.getElementById("generate");
 
 // dateDiv DOM Elements
 
@@ -75,28 +76,44 @@ async function postData(url = "", data = {}) {
 };
 
 // GET the data back from the server.js
-async function updateApp() {
+async function useServerData() {
     const req = await fetch('/server_data');
+
     try {
-        const allData = await req.json();
-        console.log("got the data back from the server")
-        console.log(allData);
+        let Data = await req.json();
+        // the object keeps geting longer whith each click so this makes sure it is the most recent click's info)
+        for (let i = 0; i < Data.length; i++) {
+            console.log("got the data back from the server");
+            const data = Data[i].data;
+            // update UI
+            dateDiv.innerText = newDate;
+            // Formula to convert Kelvin to Celcius
+            console.log(data.temp);
+            let celsius = data.temp - 273.15;
+            temperatureSpan.textContent = celsius + " degrees celsius";
+        }
     } catch (error) {
         console.log("couldn't get the data back from the server", error);
     };
 
-};
+}
 // test
 
 
 // main functions
 
+generateButton.addEventListener("click", runProgram);
 
-
-
-getWeatherData(baseURL, 19128, APIKey).then(data => {
-    postData("/add", {
-        data: data,
-    });
-    updateApp();
-});
+function runProgram() {
+    let enteredZipcode = document.getElementById('zip').value;
+    if (enteredZipcode.length !== 5) {
+        alert("please enter a 5 digit US zipcode")
+    } else {
+        getWeatherData(baseURL, enteredZipcode, APIKey).then(data => {
+            postData("/add", {
+                data: data,
+            });
+            useServerData();
+        });
+    }
+}

@@ -5,6 +5,7 @@ body {
     background-repeat: repeat;
     background-size: contain;
     background-position: center;
+    text-align: center;
 }
 
 #app {
@@ -41,6 +42,10 @@ body {
 #temp {}
 
 #content {}
+
+.title {
+    text-align: center;
+}
 
 .headline {
     grid-area: title;
