@@ -1,18 +1,31 @@
 /* Global Variables */
 // API URL/Key
-const baseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
+const baseURL = "https://api.openweathermap.org/data/2.5/weather?q=";
 const APIKey = ",us&appid=f0e2f2fd5311df4ea9bdff1d071ad35e";
-
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+
+// DOM Elements
+const dateDiv = document.getElementById("date");
+const tempDiv = document.getElementById("temp");
+const contentDiv = document.getElementById("content");
+
+// dateDiv DOM Elements
+
+// tempDiv elements
+const temperatureSpan = document.getElementById("temperature");
+const feelsLikeSpan = document.getElementById("feelsLike")
+// contentDiv elements
+
+
 
 // helper functions
 
 // Get weather info from API
 
 async function getWeatherData(baseURL, zipcode, APIKey) {
-    // makes a fetch request to the api url and saves the response (await means it doesn't move on till it is complete)
+    // makes a fetch request to the api url and saves the response (await means it doesn"t move on till it is complete)
     const response = await fetch(baseURL + zipcode + APIKey);
     // save that response as a json file
     const data = await response.json();
@@ -37,17 +50,17 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
 
 };
 
-// POST weather data to server.js using whatever url you pick
-async function postData(url = '', data = {}) {
+// POST weather data to server.js
+async function postData(url = "", data = {}) {
     // awaits the url to be fetched and saves everything as the response to give to the server
     const res = await fetch(url, {
         // POST Method
-        method: 'POST',
+        method: "POST",
         // default value (not safe)
-        credentials: 'same-origin',
+        credentials: "same-origin",
         // what will be posted
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         // what the body that the server.js will read
         body: JSON.stringify(data)
@@ -61,14 +74,29 @@ async function postData(url = '', data = {}) {
     };
 };
 
+// GET the data back from the server.js
+async function updateApp() {
+    const req = await fetch('/server_data');
+    try {
+        const allData = await req.json();
+        console.log("got the data back from the server")
+        console.log(allData);
+    } catch (error) {
+        console.log("couldn't get the data back from the server", error);
+    };
+
+};
 // test
 
 
 // main functions
 
 
+
+
 getWeatherData(baseURL, 19128, APIKey).then(data => {
-    postData('/add', {
+    postData("/add", {
         data: data,
     });
+    updateApp();
 });
