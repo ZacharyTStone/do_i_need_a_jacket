@@ -25,7 +25,10 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
             city: data.name,
             country: data.sys.country,
             temp: data.main.temp,
+            feelslike: data.main.feelslike,
             description: data.weather[0].description,
+            icon: data.weather[0].icon,
+            humidity: data.main.humidity,
         };
 
     } catch (error) {
@@ -34,6 +37,29 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
 
 };
 
+// POST weather data to server.js
+async function postData(url = '', data = {}) {
+    // awaits the url to be fetched and saves everything as the response to give to the server
+    const res = await fetch(url, {
+        // POST Method
+        method: 'POST',
+        // default value not safe
+        credentials: 'same-origin',
+        // what will be posted
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // what the body that the server.js will read
+        body: JSON.stringify(data)
+    });
+    try {
+        // try to return the response 
+        const getData = await res.json();
+        return getData;
+    } catch (error) {
+        console.log("Error:could not post anything to server.js", error);
+    };
+};
 
 // test
 

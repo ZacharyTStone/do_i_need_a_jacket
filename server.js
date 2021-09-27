@@ -12,7 +12,7 @@ const app = express();
 const PORT = 3000;
 // use express to listen to that port and run a console log if successful
 app.listen(PORT, function () {
-    console.log("Server is a runnin", PORT);
+    console.log("Server is a runnin on port " + PORT);
 })
 
 /* Middleware*/
