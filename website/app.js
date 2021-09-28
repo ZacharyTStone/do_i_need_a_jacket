@@ -101,7 +101,7 @@ async function useServerData() {
         // add date
         dateDiv.innerHTML = "</br>" + newDate;
         // add geography 
-        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
+        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> ");
         // feelings info
         reportedFeelingsDiv.innerHTML = "<p> I see your are " + mood + " today. </h5"
         // Formula to convert Kelvin to Celcius
