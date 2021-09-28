@@ -18,7 +18,6 @@ const humidityDiv = document.getElementById("humidity");
 const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon");
 // // feelings text
-// const feelings = document.getElementById("feelings").innerText;
 // feeling Div to put server info
 const reportedFeelingsDiv = document.getElementById("reportedFeelings");
 
@@ -79,43 +78,43 @@ async function postData(url = "", data = {}) {
 
 // GET the data back from the server.js
 async function useServerData() {
+    // remove past info
+    dateDiv.innerHTML = "";
+    locationDiv.innerHTML = "";
+    temperatureDiv.innerHTML = "";
+    humidityDiv.innerHTML = "";
+    weatherDiv.innerHTML = "";
+    iconDiv.innerHTML = "";
+
     const req = await fetch('/server_data');
 
     try {
         // weather info
         let Data = await req.json();
-        // remove past info
-        dateDiv.innerHTML = "";
-        locationDiv.innerHTML = "";
-        temperatureDiv.innerHTML = "";
-        humidityDiv.innerHTML = "";
-        weatherDiv.innerHTML = "";
-        iconDiv.innerHTML = "";
-        // the object keeps geting longer whith each click so this makes sure it is the most recent click's info)
-        for (let i = 0; i < Data.length; i++) {
-            console.log("got the data back from the server");
-            const data = Data[i].data;
-            const mood = Data[i].mood;
-            console.log(data);
-            console.log(mood);
-            // update UI
-            // add date
-            dateDiv.innerHTML = "</br>" + newDate;
-            // add geography 
-            locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
-            // feelings info
-            reportedFeelingsDiv.innerHTML = "<p> I see your are " + mood + " today. </h5"
-            // Formula to convert Kelvin to Celcius
-            let celsius = Math.floor(data.temp - 273.15);
-            // Formula to convert Celcius to Fahrenheit
-            let fahrenheit = Math.floor(celsius * 1.8) + 32;
-            temperatureDiv.innerHTML = "<p>" + celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
-            // add humidity
-            humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
-            // weather info
-            weatherDiv.innerHTML = "<p> It looks like we have " + data.description + " today. </p>";
-            iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
-        }
+        // dataLenght makes so the data that is added is only the latest object
+        let dataLength = Data.length;
+        let data = Data[dataLength - 1].data;
+        let mood = Data[dataLength - 1].mood;
+        console.log(data);
+        console.log(mood);
+        // update UI
+        // add date
+        dateDiv.innerHTML = "</br>" + newDate;
+        // add geography 
+        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
+        // feelings info
+        reportedFeelingsDiv.innerHTML = "<p> I see your are " + mood + " today. </h5"
+        // Formula to convert Kelvin to Celcius
+        let celsius = Math.floor(data.temp - 273.15);
+        // Formula to convert Celcius to Fahrenheit
+        let fahrenheit = Math.floor(celsius * 1.8) + 32;
+        temperatureDiv.innerHTML = "<p>" + celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
+        // add humidity
+        humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
+        // weather info
+        weatherDiv.innerHTML = "<p> It looks like we have " + data.description + " today. </p>";
+        iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
+        // }
     } catch (error) {
         console.log("couldn't get the data back from the server", error);
         alert('City/State not found');
