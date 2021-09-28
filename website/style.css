@@ -7,9 +7,11 @@ body {
     background-position: center;
     text-align: center;
     justify-content: center;
+
 }
 
 #app {
+
 
     display: grid;
     grid-auto-rows: minmax(100px, 100px, 1fr, 200px);
@@ -24,11 +26,13 @@ body {
     color: #000000;
     justify-content: center;
     grid-gap: 1em;
-    font-size: 20px;
+    font-size: 15px;
     font-family: 'Oswald', sans-serif;
 }
 
-.holder {}
+.holder {
+    border-radius: 25%;
+}
 
 .entry {
     height: fit-content;
@@ -42,6 +46,12 @@ body {
 }
 
 #entryHolder {}
+
+/* class to add margins using DOM (adding margins before would show the div) */
+
+.margins {
+    margin: 10px;
+}
 
 #date {}
 

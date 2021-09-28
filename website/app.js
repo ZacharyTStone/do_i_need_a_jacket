@@ -7,6 +7,8 @@ let d = new Date();
 let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
 
 // DOM Elements
+
+// content
 const locationDiv = document.getElementById("location")
 const dateDiv = document.getElementById("date");
 const temperatureDiv = document.getElementById("temperature");
@@ -15,14 +17,10 @@ const entryDiv = document.querySelector("entry");
 const humidityDiv = document.getElementById("humidity");
 const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon");
-
-// dateDiv DOM Elements
-
-// tempDiv elements
-const temperatureSpan = document.getElementById("temperature");
-const feelsLikeSpan = document.getElementById("feelsLike")
-// contentDiv elements
-
+// // feelings text
+// const feelings = document.getElementById("feelings").innerText;
+// feeling Div to put server info
+const reportedFeelingsDiv = document.getElementById("reportedFeelings");
 
 
 // helper functions
@@ -84,6 +82,7 @@ async function useServerData() {
     const req = await fetch('/server_data');
 
     try {
+        // weather info
         let Data = await req.json();
         // remove past info
         dateDiv.innerHTML = "";
@@ -96,21 +95,25 @@ async function useServerData() {
         for (let i = 0; i < Data.length; i++) {
             console.log("got the data back from the server");
             const data = Data[i].data;
+            const mood = Data[i].mood;
             console.log(data);
+            console.log(mood);
             // update UI
             // add date
-            dateDiv.innerText = newDate;
+            dateDiv.innerHTML = "</br>" + newDate;
             // add geography 
             locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
+            // feelings info
+            reportedFeelingsDiv.innerHTML = "<p> I see your are " + mood + " today. </h5"
             // Formula to convert Kelvin to Celcius
             let celsius = Math.floor(data.temp - 273.15);
             // Formula to convert Celcius to Fahrenheit
             let fahrenheit = Math.floor(celsius * 1.8) + 32;
-            temperatureDiv.innerHTML = "<h5>" + celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
+            temperatureDiv.innerHTML = "<p>" + celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
             // add humidity
-            humidityDiv.innerHTML = "<h5> The humidity is " + data.humidity + "%. </h5>"
+            humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
             // weather info
-            weatherDiv.innerHTML = "<h5> It looks like we have " + data.description + " today. </h5>";
+            weatherDiv.innerHTML = "<p> It looks like we have " + data.description + " today. </p>";
             iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
         }
     } catch (error) {
@@ -137,10 +140,17 @@ function runProgram() {
         alert("Please describe your mood today.");
         return false;
     } else {
+        // get the feelings info
+        const feelings = document.getElementById('feelings').value;
+        // post the weather to the server
         getWeatherData(baseURL, enteredZipcode, APIKey).then(data => {
             postData("/add", {
+                // weather data
                 data: data,
+                // entered feelings section
+                mood: feelings,
             });
+            // get the server data back and use it
             useServerData();
         });
     }
