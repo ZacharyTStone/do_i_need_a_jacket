@@ -7,10 +7,14 @@ let d = new Date();
 let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
 
 // DOM Elements
+const locationDiv = document.getElementById("location")
 const dateDiv = document.getElementById("date");
-const tempDiv = document.getElementById("temp");
+const temperatureDiv = document.getElementById("temperature");
 const generateButton = document.getElementById("generate");
 const entryDiv = document.querySelector("entry");
+const humidityDiv = document.getElementById("humidity");
+const weatherDiv = document.getElementById("weather");
+const iconDiv = document.getElementById("icon");
 
 // dateDiv DOM Elements
 
@@ -81,21 +85,37 @@ async function useServerData() {
 
     try {
         let Data = await req.json();
+        // remove past info
+        dateDiv.innerHTML = "";
+        locationDiv.innerHTML = "";
+        temperatureDiv.innerHTML = "";
+        humidityDiv.innerHTML = "";
+        weatherDiv.innerHTML = "";
+        iconDiv.innerHTML = "";
         // the object keeps geting longer whith each click so this makes sure it is the most recent click's info)
         for (let i = 0; i < Data.length; i++) {
             console.log("got the data back from the server");
             const data = Data[i].data;
+            console.log(data);
             // update UI
-            // add new data
+            // add date
             dateDiv.innerText = newDate;
+            // add geography 
+            locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
             // Formula to convert Kelvin to Celcius
             let celsius = Math.floor(data.temp - 273.15);
             // Formula to convert Celcius to Fahrenheit
             let fahrenheit = Math.floor(celsius * 1.8) + 32;
-            temperatureSpan.textContent = celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit.";
+            temperatureDiv.innerHTML = "<h5>" + celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
+            // add humidity
+            humidityDiv.innerHTML = "<h5> The humidity is " + data.humidity + "%. </h5>"
+            // weather info
+            weatherDiv.innerHTML = "<h5> It looks like we have " + data.description + " today. </h5>";
+            iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
         }
     } catch (error) {
         console.log("couldn't get the data back from the server", error);
+        alert('City/State not found');
     };
 
 }

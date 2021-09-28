@@ -33,7 +33,7 @@ body {
 .entry {
     height: fit-content;
     grid-area: entry;
-    background: rgba(59, 74, 107, .4);
+    background: rgb(155, 172, 208);
 }
 
 
