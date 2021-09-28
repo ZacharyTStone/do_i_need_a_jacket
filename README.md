@@ -1,6 +1,16 @@
 # Weather App
 
 </br>
+<p align="center">
+    <img src="https://img.shields.io/github/languages/count/zachinjapan/weather_app?style=plastic" alt="Languages" />
+    <img src="https://img.shields.io/github/languages/top/zachinjapan/weather_app?style=plastic&labelColor=yellow" alt="Top Language" />
+    <img src="https://img.shields.io/github/languages/code-size/zachinjapan/weather_app?style=plastic" alt="Code Size" />
+    <img src="https://img.shields.io/github/repo-size/zachinjapan/weather_app?style=plastic" alt="Repo Size" />   
+    <img src="https://img.shields.io/tokei/lines/github/zachinjapan/weather_app?style=plastic" alt="Total Lines" />
+    <img src="https://img.shields.io/github/last-commit/zachinjapan/weather_app?style=plastic" alt="Last Commit" />  
+    <img src="https://img.shields.io/github/issues/zachinjapan/weather_app?style=plastic" alt="Issues" />  
+    <img src="https://img.shields.io/github/followers/zachinjapan?style=social" alt="Followers" />  
+</p>
 
 ## Description
 
