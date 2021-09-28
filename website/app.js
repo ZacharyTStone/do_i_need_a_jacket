@@ -91,10 +91,10 @@ async function useServerData() {
     try {
         // weather info
         let Data = await req.json();
-        // dataLenght makes so the data that is added is only the latest object
-        let dataLength = Data.length;
-        let data = Data[dataLength - 1].data;
-        let mood = Data[dataLength - 1].mood;
+        // dataLenght makes so the data that is added is only the latest object (count starts at 0)
+        let dataLength = (Data.length) - 1;
+        let data = Data[dataLength].data;
+        let mood = Data[dataLength].mood;
         console.log(data);
         console.log(mood);
         // update UI
