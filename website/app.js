@@ -9,8 +9,8 @@ let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
 // DOM Elements
 const dateDiv = document.getElementById("date");
 const tempDiv = document.getElementById("temp");
-const contentDiv = document.getElementById("content");
 const generateButton = document.getElementById("generate");
+const entryDiv = document.querySelector("entry");
 
 // dateDiv DOM Elements
 
@@ -86,11 +86,13 @@ async function useServerData() {
             console.log("got the data back from the server");
             const data = Data[i].data;
             // update UI
+            // add new data
             dateDiv.innerText = newDate;
             // Formula to convert Kelvin to Celcius
-            console.log(data.temp);
-            let celsius = data.temp - 273.15;
-            temperatureSpan.textContent = celsius + " degrees celsius";
+            let celsius = Math.floor(data.temp - 273.15);
+            // Formula to convert Celcius to Fahrenheit
+            let fahrenheit = Math.floor(celsius * 1.8) + 32;
+            temperatureSpan.textContent = celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit.";
         }
     } catch (error) {
         console.log("couldn't get the data back from the server", error);
@@ -105,9 +107,15 @@ async function useServerData() {
 generateButton.addEventListener("click", runProgram);
 
 function runProgram() {
+    // test zip code
     let enteredZipcode = document.getElementById('zip').value;
+    // text feelings form
+    const form = document.getElementById("feelings").value;
     if (enteredZipcode.length !== 5) {
         alert("please enter a 5 digit US zipcode")
+    } else if (form == "") {
+        alert("Please describe your mood today.");
+        return false;
     } else {
         getWeatherData(baseURL, enteredZipcode, APIKey).then(data => {
             postData("/add", {

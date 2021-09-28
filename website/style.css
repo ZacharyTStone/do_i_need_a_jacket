@@ -6,6 +6,7 @@ body {
     background-size: contain;
     background-position: center;
     text-align: center;
+    justify-content: center;
 }
 
 #app {
@@ -35,6 +36,11 @@ body {
     background: rgba(59, 74, 107, .4);
 }
 
+
+.visibile {
+    visibility: hidden;
+}
+
 #entryHolder {}
 
 #date {}
@@ -48,7 +54,9 @@ body {
 }
 
 .headline {
+    font-weight: bold;
     grid-area: title;
+    display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -90,13 +98,21 @@ textarea {
 }
 
 button {
-    width: 200px;
+    width: 100px;
     height: 100px;
+    margin: auto;
+    border-radius: 50%;
     background: #8ea3d2;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+    opacity: 0.7;
+}
+
+button:hover {
+    opacity: 1;
+    border: 2px solid black;
 }
 
 .button {
