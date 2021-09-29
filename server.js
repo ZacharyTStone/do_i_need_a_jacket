@@ -9,7 +9,7 @@ const app = express();
 // Start up an instance of app
 
 // choose a port
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 // use express to listen to that port and run a console log if successful
 app.listen(PORT, function () {
     console.log("Server is a runnin on port " + PORT);
