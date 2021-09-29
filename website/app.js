@@ -1,25 +1,26 @@
 /* Global Variables */
 // API URL/Key
 const baseURL = "https://api.openweathermap.org/data/2.5/weather?q=";
-const APIKey = ",us&appid=f0e2f2fd5311df4ea9bdff1d071ad35e";
+// in metric and then converted to farenheit later
+const APIKey = ",us&units=metric&appid=f0e2f2fd5311df4ea9bdff1d071ad35e";
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+// months start at 0 in computer land
+let newDate = (d.getMonth() + 1) + "." + d.getDate() + "." + d.getFullYear();
 
 // DOM Elements
 
 // content
 const locationDiv = document.getElementById("location")
 const dateDiv = document.getElementById("date");
-const temperatureDiv = document.getElementById("temperature");
+const temperatureDiv = document.getElementById("temp");
 const generateButton = document.getElementById("generate");
 const entryDiv = document.querySelector("entry");
 const humidityDiv = document.getElementById("humidity");
 const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon");
-// // feelings text
-// feeling Div to put server info
-const reportedFeelingsDiv = document.getElementById("reportedFeelings");
+// feeling Div to give the entered text to the  server
+const reportedFeelingsDiv = document.getElementById("content");
 
 
 // helper functions
@@ -101,14 +102,12 @@ async function useServerData() {
         // add date
         dateDiv.innerHTML = "</br>" + newDate;
         // add geography 
-        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> ");
+        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
         // feelings info
         reportedFeelingsDiv.innerHTML = "<p> I see your are " + mood + " today. </h5"
-        // Formula to convert Kelvin to Celcius
-        let celsius = Math.floor(data.temp - 273.15);
         // Formula to convert Celcius to Fahrenheit
-        let fahrenheit = Math.floor(celsius * 1.8) + 32;
-        temperatureDiv.innerHTML = "<p>" + celsius + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
+        let fahrenheit = Math.floor(data.temp * 1.8) + 32;
+        temperatureDiv.innerHTML = "<p>" + data.temp + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
         // add humidity
         humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
         // weather info
