@@ -30,7 +30,7 @@ A weather application which pulls data from the OpenWeather API, sends it to ser
 
 ## Links
 
-- GH-Pages demo site link: (https://zachinjapan.github.io/weather_app)
+- heroku demo site link: (https://zachstoneweather.herokuapp.com)
 - Github Repository URL: (https://github.com/zachinjapan/weather_app)
 
 ## Technologies Used
