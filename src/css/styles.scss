@@ -1,7 +1,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: bisque;
-    background-image: url(images/weather.jpg);
+    background-image: url("/images/weather.jpg");
     background-repeat: repeat;
     background-size: contain;
     background-position: center;
@@ -16,7 +16,6 @@ body {
     grid-template-areas:
         "title title"
         "zip zip"
-        "feeling feeling"
         "entry entry"
         "button button";
     margin: auto;
@@ -46,12 +45,13 @@ img {
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "title title"
-            "zip feeling"
+            "zip zip"
             "entry entry"
             "button button";
     }
 }
 
+/*test*/
 
 
 .holder {

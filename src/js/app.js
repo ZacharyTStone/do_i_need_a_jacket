@@ -20,7 +20,7 @@ const humidityDiv = document.getElementById("humidity");
 const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon");
 // feeling Div to give the entered text to the  server
-const reportedFeelingsDiv = document.getElementById("content");
+const clothingtDiv = document.getElementById("clothing");
 
 
 // helper functions
@@ -86,6 +86,7 @@ async function useServerData() {
     humidityDiv.innerHTML = "";
     weatherDiv.innerHTML = "";
     iconDiv.innerHTML = "";
+    clothingtDiv.innerHTML = "";
 
     const req = await fetch('/server_data');
 
@@ -96,18 +97,16 @@ async function useServerData() {
         let dataLength = (Data.length) - 1;
         let data = Data[dataLength].data;
         let mood = Data[dataLength].mood;
-        console.log(data);
-        console.log(mood);
+        let fahrenheit = Math.floor(data.temp * 1.8) + 32;
         // update UI
         // add date
         dateDiv.innerHTML = "</br>" + newDate;
+        // clothing check 
+        clothingCheck(fahrenheit);
         // add geography 
-        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
-        // feelings info
-        reportedFeelingsDiv.innerHTML = "<p> I see your are " + mood + " today. </h5"
-        // Formula to convert Celcius to Fahrenheit
-        let fahrenheit = Math.floor(data.temp * 1.8) + 32;
-        temperatureDiv.innerHTML = "<p>" + data.temp + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </h5";
+        locationDiv.innerHTML = ("<br><br><h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
+        // Jacket info
+        temperatureDiv.innerHTML = "<p>" + data.temp + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </p";
         // add humidity
         humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
         // weather info
@@ -120,6 +119,36 @@ async function useServerData() {
     };
 
 }
+
+function coatCheck(farenheitTemp) {
+    if (farenheitTemp <= 25) {
+        return true;
+    }
+}
+
+function jacketCheck(farenheitTemp) {
+    if (farenheitTemp > 25 || farenheitTemp < 44) {
+        return true;
+    }
+}
+
+function tshirtCheck(farenheitTemp) {
+    if (farenheitTemp >= 44) {
+        return true;
+    }
+}
+
+function clothingCheck(farenheitTemp) {
+    if (tshirtCheck(farenheitTemp) === true) {
+        clothingtDiv.innerHTML = "<h3> Nope! </h3> <p> You'll be fine with a tshirt today! </p>"
+    } else if (jacketCheck(farenheitTemp) === true) {
+        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Better grab a jacket! </p> "
+    } else if (coatCheck(farenheitTemp) === true) {
+        clothingtDiv.innerHTML = "<h3> No! </h3> <p> A jacket just won't cut it this time. It's coat weather! </p"
+    }
+
+}
+
 // test
 
 
@@ -131,22 +160,23 @@ function runProgram() {
     // test zip code
     let enteredZipcode = document.getElementById('zip').value;
     // text feelings form
-    const form = document.getElementById("feelings").value;
+    // const form = document.getElementById("feelings").value;
     if (enteredZipcode.length !== 5) {
         alert("please enter a 5 digit US zipcode")
-    } else if (form == "") {
-        alert("Please describe your mood today.");
-        return false;
-    } else {
+    }
+    // } else if (form == "") {
+    //     alert("Please describe your mood today.");
+    //     return false;
+    else {
         // get the feelings info
-        const feelings = document.getElementById('feelings').value;
+        // const feelings = document.getElementById('feelings').value;
         // post the weather to the server
         getWeatherData(baseURL, enteredZipcode, APIKey).then(data => {
             postData("/add", {
                 // weather data
                 data: data,
                 // entered feelings section
-                mood: feelings,
+                // mood: feelings,
             });
             // get the server data back and use it
             useServerData();

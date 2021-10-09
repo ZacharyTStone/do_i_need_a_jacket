@@ -1,0 +1,191 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: bisque;
+  background-image: url("/images/weather.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: center;
+  text-align: center;
+  justify-content: center;
+}
+
+#app {
+  width: 80%;
+  grid-template-rows: 50px 50px 50px 200px 300px;
+  grid-template-areas: "title title" "zip zip" "entry entry" "button button";
+  margin: auto;
+  display: grid;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.605);
+  color: #000000;
+  justify-content: center;
+  grid-gap: 18px;
+  font-size: 12px;
+  font-family: "Oswald", sans-serif;
+}
+
+img {
+  height: 50px;
+  width: 50px;
+}
+
+/* desktopsizes */
+@media only screen and (min-width: 600px) {
+  #app {
+    font-size: 20px;
+    width: 50%;
+    grid-template-rows: 100px 150px 1fr 75px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "title title" "zip zip" "entry entry" "button button";
+  }
+}
+/*test*/
+.holder {
+  border-radius: 25%;
+}
+
+.entry {
+  height: fit-content;
+  grid-area: entry;
+  background: #9bacd0;
+}
+
+.visibile {
+  visibility: hidden;
+}
+
+/* class to add margins using DOM (adding margins before would show the div) */
+.margins {
+  margin: 10px;
+}
+
+.title {
+  text-align: center;
+}
+
+.headline {
+  font-weight: bold;
+  grid-area: title;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.zip {
+  grid-area: zip;
+  width: 100%;
+}
+
+.feel {
+  grid-area: feeling;
+  width: 100%;
+}
+
+.my_input {
+  width: 100%;
+}
+
+/*  Basic Styling To Override Default For Basic HTML Elements */
+label {
+  display: block;
+}
+
+/* desktopsizes */
+@media only screen and (min-width: 600px) {
+  label {
+    font-size: 27px;
+  }
+}
+input {
+  display: inline-block;
+  /* height: 20px; */
+  width: 80%;
+  background: #22b2da;
+  font-family: "Oswald", sans-serif;
+  border: none;
+}
+
+/* desktopsizes */
+@media only screen and (min-width: 600px) {
+  input {
+    font-size: 20px;
+  }
+}
+textarea {
+  width: 80%;
+}
+
+button {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border-radius: 50%;
+  background: #8ea3d2;
+  font-family: "Oswald", sans-serif;
+  border: none;
+  box-shadow: 2px 4px 5px #444;
+  opacity: 0.7;
+  font-size: 10px;
+}
+
+/* desktopsizes */
+@media only screen and (min-width: 600px) {
+  button {
+    width: 100px;
+    height: 100px;
+    font-size: 26px;
+  }
+}
+button:hover {
+  opacity: 1;
+  border: 2px solid black;
+}
+
+.button {
+  grid-area: button;
+}
+
+@media only screen and (min-width: 600px) {
+  h1 {
+    font-size: 36px;
+  }
+}
+textarea {
+  background: #22b2da;
+  font-family: "Oswald", sans-serif;
+}
+
+@media only screen and (min-width: 600px) {
+  textarea {
+    font-size: 20px;
+  }
+}
+/* Reset style for HTML element on active to have no border*/
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+/* Style for Placeholder Text*/
+::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: #f0d43a;
+  font-family: "Oswald", sans-serif;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #f0d43a;
+  font-family: "Oswald", sans-serif;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #f0d43a;
+  font-family: "Oswald", sans-serif;
+}
+
+/*# sourceMappingURL=styles.css.map */
