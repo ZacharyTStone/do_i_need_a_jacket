@@ -1,4 +1,4 @@
-# Weather App
+# Do I Need A Jacket?
 
 </br>
 <p align="center">
@@ -14,7 +14,11 @@
 
 ## Description
 
-A weather application which pulls data from the OpenWeather API, sends it to servers.js and then uses a GET request to get the data back to then update the index.html file
+A weather application which 
+1. pulls data from the OpenWeather API
+2. sends it to servers.js
+3. uses a GET request to get the data back
+4. Updates the index.html file
 
 </br>
 

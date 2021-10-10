@@ -165,14 +165,20 @@ function coatCheck(finalTemp) {
     }
 }
 
-function jacketCheck(finalTemp) {
+function heavyJacketCheck(finalTemp) {
     if (finalTemp > 25 || finalTemp < 44) {
         return true;
     }
 }
 
+function lightJacketCheck(finalTemp) {
+    if (finalTemp >= 44 || finalTemp < 65) {
+        return true
+    }
+}
+
 function tshirtCheck(finalTemp) {
-    if (finalTemp >= 44) {
+    if (finalTemp >= 65) {
         return true;
     }
 }
@@ -180,10 +186,12 @@ function tshirtCheck(finalTemp) {
 function clothingCheck(farenheitTemp) {
     if (tshirtCheck(farenheitTemp) === true) {
         clothingtDiv.innerHTML = "<h3> Nope! </h3> <p> You'll be fine with a tshirt today! </p>"
-    } else if (jacketCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Better grab a jacket or light coat! </p> "
+    } else if (lightJacketCheck(farenheitTemp) === true) {
+        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Best grab a light jacket or fleece.</p> "
+    } else if (heavyJacketCheck(farenheitTemp) === true) {
+        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Better grab a heavy jacket or light coat. </p> "
     } else if (coatCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> No! </h3> <p> A jacket or light coat just won't cut it this time. It's winter coat weather! </p"
+        clothingtDiv.innerHTML = "<h3> Nope! </h3> <p> It's too cold for a Jacket silly!  It's winter coat weather! </p"
     }
 
 }
