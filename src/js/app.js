@@ -181,9 +181,9 @@ function clothingCheck(farenheitTemp) {
     if (tshirtCheck(farenheitTemp) === true) {
         clothingtDiv.innerHTML = "<h3> Nope! </h3> <p> You'll be fine with a tshirt today! </p>"
     } else if (jacketCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Better grab a jacket! </p> "
+        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Better grab a jacket or light coat! </p> "
     } else if (coatCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> No! </h3> <p> A jacket just won't cut it this time. It's coat weather! </p"
+        clothingtDiv.innerHTML = "<h3> No! </h3> <p> A jacket or light coat just won't cut it this time. It's winter coat weather! </p"
     }
 
 }
