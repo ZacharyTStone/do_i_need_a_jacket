@@ -151,7 +151,7 @@ function testRadioValue(radioclass) {
 
 function rainCheck(weatherDescription) {
     if (weatherDescription == "Drizzle") {
-        return "Might want to grab a umbrella."
+        return "Might want to hava an umbrella handy."
     } else if (weatherDescription == "Rain") {
         return "Might want to grab a umbrella."
     }
