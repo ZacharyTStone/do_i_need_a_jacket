@@ -139,8 +139,6 @@ function testRadioValue(radioclass) {
         if (ele[i].type = "radio") {
 
             if (ele[i].checked) {
-
-                console.log("when  i tested for the radio value the value I found was a " + typeof (ele[i].value));
                 return convertStringToInteger(ele[i].value);
             }
         }
