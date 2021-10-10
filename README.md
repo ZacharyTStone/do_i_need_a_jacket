@@ -34,8 +34,8 @@ A weather application which
 
 ## Links
 
-- heroku demo site link: (https://zachstoneweather.herokuapp.com)
-- Github Repository URL: (https://github.com/zachinjapan/weather_app)
+- heroku demo site link: (https://doineedajackettoday.herokuapp.com)
+- Github Repository URL: (https://github.com/zachinjapan/do_i_need_a_jacket)
 
 ## Technologies Used
 
