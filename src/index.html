@@ -11,21 +11,24 @@
 
 <body>
   <div id="app">
-    <div class="holder headline">
+    <div class="section headline">
       <h1>Do I Need a Jacket?</h1>
       <h5>(USA Edition)</h5>
     </div>
-    <div class="holder zip">
+    <div class="section zip">
       <label for="zip">Enter Zipcode here</label>
       <input type="text" id="zip" placeholder="enter zip code here">
     </div>
-    <!-- <div class="holder feel">
-      <label for="feelings">How are you feeling today?</label>
-      <textarea class="myInput" id="feelings" placeholder="Enter your feelings here"></textarea>
-    </div> -->
-    <div class="holder entry visible">
+    <div class="section personal-temp">
+      <input type="radio" class="personal-temp" value=0 name="personal-temp-radio" checked="checked">
+      <label for="personal-temp-normal">I don't get hot or cold easily.</label><br>
+      <input type="radio" class="personal-temp" value=3 name="personal-temp-radio">
+      <label for="personal-temp-hot">I get hot easily</label><br>
+      <input type="radio" class="personal-temp" value=-3 name="personal-temp-radio">
+      <label for="personal-temp-cold">I get cold easily</label>
+    </div>
+    <div class="section entry">
       <div id="entryHolder">
-        <div id="date"></div>
         <div id="clothing"></div>
         <div id="location"></div>
         <div id="temp"></div>
@@ -35,7 +38,9 @@
         </div>
       </div>
     </div>
-    <button class="button" id="generate" type="submit"> Generate </button>
+    <div class="section button">
+      <button class="button" id="generate" type="submit"> Generate </button>
+    </div>
   </div>
   <script src="/js/app.js" type="text/javascript"></script>
 

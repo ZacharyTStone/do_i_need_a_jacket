@@ -3,23 +3,19 @@
 const baseURL = "https://api.openweathermap.org/data/2.5/weather?q=";
 // in metric and then converted to farenheit later
 const APIKey = ",us&units=metric&appid=f0e2f2fd5311df4ea9bdff1d071ad35e";
-// Create a new date instance dynamically with JS
-let d = new Date();
-// months start at 0 in computer land
-let newDate = (d.getMonth() + 1) + "." + d.getDate() + "." + d.getFullYear();
+
 
 // DOM Elements
 
+
 // content
 const locationDiv = document.getElementById("location")
-const dateDiv = document.getElementById("date");
 const temperatureDiv = document.getElementById("temp");
 const generateButton = document.getElementById("generate");
 const entryDiv = document.querySelector("entry");
 const humidityDiv = document.getElementById("humidity");
 const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon");
-// feeling Div to give the entered text to the  server
 const clothingtDiv = document.getElementById("clothing");
 
 
@@ -43,7 +39,8 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
             temp: data.main.temp,
             humidity: data.main.humidity,
             feelslike: data.main.feelslike,
-            description: data.weather[0].description,
+            // gets teh main info which is shortned compared to .description
+            description: data.weather[0].main,
             icon: data.weather[0].icon,
         };
 
@@ -80,7 +77,6 @@ async function postData(url = "", data = {}) {
 // GET the data back from the server.js
 async function useServerData() {
     // remove past info
-    dateDiv.innerHTML = "";
     locationDiv.innerHTML = "";
     temperatureDiv.innerHTML = "";
     humidityDiv.innerHTML = "";
@@ -96,21 +92,27 @@ async function useServerData() {
         // dataLenght makes so the data that is added is only the latest object (count starts at 0)
         let dataLength = (Data.length) - 1;
         let data = Data[dataLength].data;
-        let mood = Data[dataLength].mood;
+        let personalTemp = Data[dataLength].personalTemp;
+        console.log(personalTemp);
+        // farrenheit 
         let fahrenheit = Math.floor(data.temp * 1.8) + 32;
+        // adjusted temp using personal temp
+        let adjustedTemp = fahrenheit + personalTemp;
+        console.log("fahrenheit is " + (fahrenheit));
+        console.log("personalTemp is " + (personalTemp));
+
+        console.log("the adjustedTemp is " + adjustedTemp);
+        // clothing check taking into account personal temp
+        clothingCheck(adjustedTemp);
         // update UI
-        // add date
-        dateDiv.innerHTML = "</br>" + newDate;
-        // clothing check 
-        clothingCheck(fahrenheit);
         // add geography 
-        locationDiv.innerHTML = ("<br><br><h3> the weather in " + data.city + "," + data.country + " is: </h3> </br> ");
+        locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> ");
         // Jacket info
         temperatureDiv.innerHTML = "<p>" + data.temp + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </p";
         // add humidity
         humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
-        // weather info
-        weatherDiv.innerHTML = "<p> It looks like we have " + data.description + " today. </p>";
+        // weather info (data.main aka data.descripting comes as an uppercase first letter)
+        weatherDiv.innerHTML = "<p> It looks like we have " + (data.description).toLowerCase() + " today. <br>" + rainCheck(data.description) + "</p>";
         iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
         // }
     } catch (error) {
@@ -120,20 +122,57 @@ async function useServerData() {
 
 }
 
-function coatCheck(farenheitTemp) {
-    if (farenheitTemp <= 25) {
+// converting radio value to an integer 
+
+function convertStringToInteger(string) {
+    return parseInt(string);
+}
+
+// testing radio to see which one is highlighted based on id
+function testRadioValue(radioclass) {
+
+    var ele = document.getElementsByClassName(radioclass);
+    console.log("ele is" + ele);
+
+    for (i = 0; i < ele.length; i++) {
+
+        if (ele[i].type = "radio") {
+
+            if (ele[i].checked) {
+
+                console.log("when  i tested for the radio value the value I found was a " + typeof (ele[i].value));
+                return convertStringToInteger(ele[i].value);
+            }
+        }
+    }
+}
+
+// functions testing for rain
+
+function rainCheck(weatherDescription) {
+    if (weatherDescription == "Drizzle") {
+        return "Might want to grab a umbrella."
+    } else if (weatherDescription == "Rain") {
+        return "Might want to grab a umbrella."
+    }
+}
+
+// functions testing for shirt/jacket/ or coat
+
+function coatCheck(finalTemp) {
+    if (finalTemp <= 25) {
         return true;
     }
 }
 
-function jacketCheck(farenheitTemp) {
-    if (farenheitTemp > 25 || farenheitTemp < 44) {
+function jacketCheck(finalTemp) {
+    if (finalTemp > 25 || finalTemp < 44) {
         return true;
     }
 }
 
-function tshirtCheck(farenheitTemp) {
-    if (farenheitTemp >= 44) {
+function tshirtCheck(finalTemp) {
+    if (finalTemp >= 44) {
         return true;
     }
 }
@@ -157,26 +196,22 @@ function clothingCheck(farenheitTemp) {
 generateButton.addEventListener("click", runProgram);
 
 function runProgram() {
-    // test zip code
+
+    // inputs
     let enteredZipcode = document.getElementById('zip').value;
-    // text feelings form
-    // const form = document.getElementById("feelings").value;
+    // test zip code
     if (enteredZipcode.length !== 5) {
         alert("please enter a 5 digit US zipcode")
-    }
-    // } else if (form == "") {
-    //     alert("Please describe your mood today.");
-    //     return false;
-    else {
-        // get the feelings info
-        // const feelings = document.getElementById('feelings').value;
+    } else {
+        // get results of the personal temp feeling radio 
+        let enteredPersonalTemp = testRadioValue("personal-temp")
         // post the weather to the server
         getWeatherData(baseURL, enteredZipcode, APIKey).then(data => {
             postData("/add", {
                 // weather data
                 data: data,
-                // entered feelings section
-                // mood: feelings,
+                // personal info
+                personalTemp: enteredPersonalTemp,
             });
             // get the server data back and use it
             useServerData();
