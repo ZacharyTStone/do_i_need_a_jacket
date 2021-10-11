@@ -27,11 +27,11 @@ body {
 }
 
 .personal-temp-div label {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 .personal-temp-div .form-check-input {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .personal-temp-div {
