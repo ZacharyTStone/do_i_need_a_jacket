@@ -121,7 +121,13 @@ async function useServerData() {
         // }
     } catch (error) {
         console.log("couldn't get the data back from the server", error);
-        alert('City/State not found');
+        locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
+        temperatureDiv.innerHTML = "";
+        humidityDiv.innerHTML = "";
+        weatherDiv.innerHTML = "";
+        iconDiv.innerHTML = "";
+        clothingtDiv.innerHTML = "";
+        feelsLikeDiv.innerHTML = "";
     };
 
 }
