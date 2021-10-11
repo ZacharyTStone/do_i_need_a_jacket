@@ -15,8 +15,9 @@ const generateButton = document.getElementById("generate");
 const entryDiv = document.querySelector("entry");
 const humidityDiv = document.getElementById("humidity");
 const weatherDiv = document.getElementById("weather");
-const iconDiv = document.getElementById("icon");
+const iconDiv = document.getElementById("icon-div");
 const clothingtDiv = document.getElementById("clothing");
+const feelsLikeDiv = document.getElementById("feelslike")
 
 
 // helper functions
@@ -38,10 +39,11 @@ async function getWeatherData(baseURL, zipcode, APIKey) {
             country: data.sys.country,
             temp: data.main.temp,
             humidity: data.main.humidity,
-            feelslike: data.main.feelslike,
-            // gets teh main info which is shortned compared to .description
+            feelsLike: data.main.feels_like,
+            // gets the main info which is shorter than .description
             description: data.weather[0].main,
             icon: data.weather[0].icon,
+            cloudiness: data.clouds
         };
 
     } catch (error) {
@@ -83,34 +85,36 @@ async function useServerData() {
     weatherDiv.innerHTML = "";
     iconDiv.innerHTML = "";
     clothingtDiv.innerHTML = "";
+    feelsLikeDiv.innerHTML = "";
 
     const req = await fetch('/server_data');
 
     try {
         // weather info
         let Data = await req.json();
-        // dataLenght makes so the data that is added is only the latest object (count starts at 0)
+        // dataLength makes so the data that is added is only the latest object (count starts at 0)
         let dataLength = (Data.length) - 1;
         let data = Data[dataLength].data;
+        // personal temp means the number that will be added or sbutracted to the actual temp
         let personalTemp = Data[dataLength].personalTemp;
-        console.log(personalTemp);
         // farrenheit 
         let fahrenheit = Math.floor(data.temp * 1.8) + 32;
         // adjusted temp using personal temp
         let adjustedTemp = fahrenheit + personalTemp;
-        console.log("fahrenheit is " + (fahrenheit));
-        console.log("personalTemp is " + (personalTemp));
+        // feels like temp to fahrenheit 
+        let feelsLikeFahreneheit = Math.floor(data.feelsLike * 1.8) + 32;
 
-        console.log("the adjustedTemp is " + adjustedTemp);
         // clothing check taking into account personal temp
         clothingCheck(adjustedTemp);
         // update UI
         // add geography 
         locationDiv.innerHTML = ("<h3> the weather in " + data.city + "," + data.country + " is: </h3> ");
-        // Jacket info
-        temperatureDiv.innerHTML = "<p>" + data.temp + " degrees celsius or " + fahrenheit + " degrees fahrenheit. </p";
+        // temp
+        temperatureDiv.innerHTML = "<p>" + fahrenheit + " degrees fahrenheit or " + data.temp + " degrees celsius. </p";
+        // feels like temp
+        feelsLikeDiv.innerHTML = "<p> We're looking at a 'feels like' temperature of " + feelsLikeFahreneheit + " degrees fahrenheit.</p>"
         // add humidity
-        humidityDiv.innerHTML = "<p> The humidity is " + data.humidity + "%. </p>"
+        humidityDiv.innerHTML = "<p> The humidity level is " + data.humidity + "%. </p>"
         // weather info (data.main aka data.descripting comes as an uppercase first letter)
         weatherDiv.innerHTML = "<p> It looks like we have " + (data.description).toLowerCase() + " today. <br>" + rainCheck(data.description) + "</p>";
         iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
@@ -215,6 +219,7 @@ function runProgram() {
         weatherDiv.innerHTML = "";
         iconDiv.innerHTML = "";
         clothingtDiv.innerHTML = "";
+        feelsLikeDiv.innerHTML = "";
 
     } else {
         // get results of the personal temp feeling radio 

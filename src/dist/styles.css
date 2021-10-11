@@ -9,14 +9,13 @@ body {
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  color: black;
 }
 
 #app {
   height: fit-content;
   width: fit-content;
   margin: auto;
-  background-color: #a7a7a7;
+  background-color: #dfdfdf;
 }
 
 .sub-title {
@@ -27,6 +26,14 @@ body {
   padding: 10px;
 }
 
+.personal-temp-div label {
+  font-size: 1.5rem;
+}
+.personal-temp-div .form-check-input {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .personal-temp-div {
   display: flex;
   justify-content: center;
@@ -35,7 +42,12 @@ body {
   width: 100%;
 }
 
-#icon {
+.button-div {
+  display: flex;
+  justify-content: center;
+}
+
+#icon-div {
   display: flex;
   flex-direction: row;
   justify-content: center;

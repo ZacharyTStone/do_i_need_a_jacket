@@ -19,7 +19,7 @@
   <div id="app">
     <div class="section headline">
       <h1>Do I Need a Jacket? <span class="sub-title "><u>(<span style="color: red;">U</span><span
-              style="color: rgb(215, 214, 214);">S</span><span style="color: rgb(47, 47, 255);">A</span>
+              style="color: rgb(172, 172, 172);">S</span><span style="color: rgb(47, 47, 255);">A</span>
             Edition)</u></span>
       </h1>
     </div>
@@ -36,8 +36,8 @@
         <label for="personal-temp-cold" class="form-check-label">I get cold easily</label>
       </div>
     </div>
-    <div class="section button">
-      <button class="btn btn-primary button" id="generate" type="submit" data-bs-toggle="modal"
+    <div class="section button-div">
+      <button class="btn btn-primary" id="generate" type="submit" data-bs-toggle="modal"
         data-bs-target="#staticBackdrop">
         Generate </button>
     </div>
@@ -61,11 +61,12 @@
               <div class="weather-info-div">
                 <ul>
                   <li id="temp"></li>
+                  <li id="feelslike"></li>
                   <li id="humidity"></li>
                   <li id="weather"></li>
                 </ul>
               </div>
-              <div id="icon">
+              <div id="icon-div">
               </div>
             </div>
           </div>
