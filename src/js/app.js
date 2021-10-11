@@ -116,7 +116,7 @@ async function useServerData() {
         // add humidity
         humidityDiv.innerHTML = "<p> The humidity level is " + data.humidity + "%. </p>"
         // weather info (data.main aka data.descripting comes as an uppercase first letter)
-        weatherDiv.innerHTML = "<p> It looks like we have " + (data.description).toLowerCase() + " today. <br>" + rainCheck(data.description) + "</p>";
+        weatherDiv.innerHTML = "<p> It looks like we have weather that is " + (data.description).toLowerCase() + " today. <br>" + rainCheck(data.description) + "</p>";
         iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
         // }
     } catch (error) {
