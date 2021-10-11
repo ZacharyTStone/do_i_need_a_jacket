@@ -4,23 +4,41 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  color: black;
 }
 
 #app {
-  height: 100%;
-  width: 75%;
+  height: fit-content;
+  width: fit-content;
   margin: auto;
+  background-color: #a7a7a7;
 }
 
-.entry {
-  height: 50vh;
+.sub-title {
+  font-size: small;
+}
+
+.section {
+  padding: 10px;
+}
+
+.personal-temp-div {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  text-align: left;
   width: 100%;
-  background-color: #98c9ee;
-  border-radius: 15%;
+}
+
+#icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=styles.css.map */

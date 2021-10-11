@@ -149,9 +149,11 @@ function testRadioValue(radioclass) {
 
 function rainCheck(weatherDescription) {
     if (weatherDescription == "Drizzle") {
-        return "Might want to hava an umbrella handy."
+        return "Might want to hava an umbrella handy.";
     } else if (weatherDescription == "Rain") {
-        return "Might want to grab a umbrella."
+        return "Might want to grab a umbrella.";
+    } else {
+        return "";
     }
 }
 
@@ -183,13 +185,13 @@ function tshirtCheck(finalTemp) {
 
 function clothingCheck(farenheitTemp) {
     if (tshirtCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> Nope! </h3> <p> You'll be fine with a tshirt today! </p>"
+        clothingtDiv.innerHTML = "<h1> ...Nope! </h1> <p> You'll be fine with a tshirt today! </p>"
     } else if (lightJacketCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Best grab a light jacket or fleece.</p> "
+        clothingtDiv.innerHTML = "<h1> ...YES! </h1> <p> Best grab a light jacket or fleece.</p> "
     } else if (heavyJacketCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> YES! </h3> <p> Better grab a heavy jacket or light coat. </p> "
+        clothingtDiv.innerHTML = "<h1> ...YES! </h1> <p> Better grab a heavy jacket or light coat. </p> "
     } else if (coatCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h3> Nope! </h3> <p> It's too cold for a Jacket silly!  It's winter coat weather! </p"
+        clothingtDiv.innerHTML = "<h1> ...Nope! </h1> <p> It's too cold for a Jacket silly!  It's winter coat weather! </p"
     }
 
 }
@@ -207,7 +209,13 @@ function runProgram() {
     let enteredZipcode = document.getElementById('zip').value;
     // test zip code
     if (enteredZipcode.length !== 5) {
-        alert("please enter a 5 digit US zipcode")
+        locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
+        temperatureDiv.innerHTML = "";
+        humidityDiv.innerHTML = "";
+        weatherDiv.innerHTML = "";
+        iconDiv.innerHTML = "";
+        clothingtDiv.innerHTML = "";
+
     } else {
         // get results of the personal temp feeling radio 
         let enteredPersonalTemp = testRadioValue("personal-temp")

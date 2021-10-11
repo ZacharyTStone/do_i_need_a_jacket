@@ -4,25 +4,43 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     height: 100vh;
     width: 100vw;
+    color: black;
 }
 
 
 #app {
-    height: 100%;
-    width: 75%;
+    height: fit-content;
+    width: fit-content;
     margin: auto;
+    background-color: rgb(167, 167, 167);
+}
+
+.sub-title {
+    font-size: small;
 }
 
 // css for all sections
-.section {}
+.section {
+    padding: 10px;
+}
 
-.entry {
-    height: 50vh;
+// radio buttons
+
+.personal-temp-div {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: left;
     width: 100%;
-    background-color: rgb(152, 201, 238);
-    border-radius: 15%;
+}
+
+#icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
