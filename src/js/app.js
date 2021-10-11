@@ -116,7 +116,7 @@ async function useServerData() {
         // add humidity
         humidityDiv.innerHTML = "<p> The humidity level is " + data.humidity + "%. </p>"
         // weather info (data.main aka data.descripting comes as an uppercase first letter)
-        weatherDiv.innerHTML = "<p> It looks like we have weather that is " + (data.description).toLowerCase() + " today. <br>" + rainCheck(data.description) + "</p>";
+        weatherDiv.innerHTML = "<p> We're looking at " + (data.description).toLowerCase() + " today. <br>" + rainCheck(data.description) + "</p>";
         iconDiv.innerHTML = "<img src=" + "'http://openweathermap.org/img/wn/" + data.icon + "@2x.png'>";
         // }
     } catch (error) {
@@ -189,7 +189,7 @@ function tshirtCheck(finalTemp) {
 
 function clothingCheck(farenheitTemp) {
     if (tshirtCheck(farenheitTemp) === true) {
-        clothingtDiv.innerHTML = "<h1> ...Nope! </h1> <p> You'll be fine with a tshirt today! </p>"
+        clothingtDiv.innerHTML = "<h1> ...Nope! </h1> <p> You'll be fine with a tshirt! </p>"
     } else if (lightJacketCheck(farenheitTemp) === true) {
         clothingtDiv.innerHTML = "<h1> ...YES! </h1> <p> Best grab a light jacket or fleece.</p> "
     } else if (heavyJacketCheck(farenheitTemp) === true) {
