@@ -112,7 +112,7 @@ async function useServerData() {
         // temp
         temperatureDiv.innerHTML = "<p>" + fahrenheit + " degrees fahrenheit or " + data.temp + " degrees celsius. </p";
         // feels like temp
-        feelsLikeDiv.innerHTML = "<p> We're looking at a 'feels like' temperature of " + feelsLikeFahreneheit + " degrees fahrenheit.</p>"
+        feelsLikeDiv.innerHTML = "<p> The 'feels like' temperature is " + feelsLikeFahreneheit + " degrees fahrenheit.</p>"
         // add humidity
         humidityDiv.innerHTML = "<p> The humidity level is " + data.humidity + "%. </p>"
         // weather info (data.main aka data.descripting comes as an uppercase first letter)
