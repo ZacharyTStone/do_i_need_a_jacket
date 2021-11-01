@@ -205,7 +205,15 @@ function clothingCheck(farenheitTemp) {
 
 // main functions
 
-generateButton.addEventListener("click", runProgram);
+// adds a event listner to start getting the data as soon as the user enters 5 characters in the zipcode form
+
+let zipcodeForm = document.getElementById("zip");
+zipcodeForm.addEventListener("keyup", function () {
+  if (document.getElementById("zip").value.length == 5) {
+    console.log(document.getElementById("zip").value.length);
+    runProgram();
+  }
+});
 
 function runProgram() {
   // inputs
