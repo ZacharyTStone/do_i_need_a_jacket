@@ -16,7 +16,17 @@ const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon-div");
 const clothingtDiv = document.getElementById("clothing");
 const feelsLikeDiv = document.getElementById("feelslike");
-
+// radio button listner to re-check the weather
+const radioButtons = document.getElementsByClassName("form-check-input");
+for (let x = 0; x < 3; x++) {
+  radioButtons[x].addEventListener("click", function () {
+    console.log("clicked");
+    if (document.getElementById("zip").value.length == 5) {
+      console.log(document.getElementById("zip").value.length);
+      runProgram();
+    }
+  });
+}
 // helper functions
 
 // Get weather info from API
@@ -92,6 +102,7 @@ async function useServerData() {
     let data = Data[dataLength].data;
     // personal temp means the number that will be added or sbutracted to the actual temp
     let personalTemp = Data[dataLength].personalTemp;
+    console.log("the change in personal temp is " + personalTemp);
     // farrenheit
     let fahrenheit = Math.floor(data.temp * 1.8) + 32;
     // adjusted temp using personal temp
@@ -212,6 +223,22 @@ zipcodeForm.addEventListener("keyup", function () {
   if (document.getElementById("zip").value.length == 5) {
     console.log(document.getElementById("zip").value.length);
     runProgram();
+  }
+});
+
+// add event listner to remove data on any requests less than 5 characters
+generateButton.addEventListener("click", function () {
+  console.log("generateButto was clicked");
+  if (document.getElementById("zip").value.length !== 5) {
+    locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
+    temperatureDiv.innerHTML = "";
+    humidityDiv.innerHTML = "";
+    weatherDiv.innerHTML = "";
+    iconDiv.innerHTML = "";
+    clothingtDiv.innerHTML = "";
+    feelsLikeDiv.innerHTML = "";
+  } else {
+    console.log("we good");
   }
 });
 
