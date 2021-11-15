@@ -49,3 +49,5 @@ app.get("/server_data", (req, res) => {
   res.send(projectData);
   console.log("sent project data back to the app.js file");
 });
+
+// test
