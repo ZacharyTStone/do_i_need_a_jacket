@@ -155,7 +155,7 @@ function testRadioValue(radioclass) {
   }
 }
 
-// functions testing for rain
+// function testing for rain
 
 function rainCheck(weatherDescription) {
   if (weatherDescription == "Drizzle") {

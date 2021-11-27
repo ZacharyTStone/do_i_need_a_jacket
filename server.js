@@ -35,6 +35,8 @@ app.use(cors());
 app.use(express.static("src"));
 
 // Setup Server
+// Initialize the main project folder
+app.use(express.static(__dirname + "/src"));
 
 // when the app.js makes a post request
 app.post("/add", (req, res) => {
@@ -47,6 +49,11 @@ app.post("/add", (req, res) => {
 // send that data back to the app.js file when requested
 app.get("/server_data", (req, res) => {
   res.send(projectData);
+  console.log("sent project data back to the app.js file");
+});
+
+app.get("/", (req, res) => {
+  res.send(index.html);
   console.log("sent project data back to the app.js file");
 });
 
