@@ -16,15 +16,7 @@ const weatherDiv = document.getElementById("weather");
 const iconDiv = document.getElementById("icon-div");
 const clothingtDiv = document.getElementById("clothing");
 const feelsLikeDiv = document.getElementById("feelslike");
-// radio button listner to re-check the weather
-const radioButtons = document.getElementsByClassName("form-check-input");
-for (let x = 0; x < 3; x++) {
-  radioButtons[x].addEventListener("click", function () {
-    if (document.getElementById("zip").value.length == 5) {
-      runProgram();
-    }
-  });
-}
+
 // helper functions
 
 // Get weather info from API
@@ -98,17 +90,13 @@ async function useServerData() {
     // dataLength makes so the data that is added is only the latest object (count starts at 0)
     let dataLength = Data.length - 1;
     let data = Data[dataLength].data;
-    // personal temp means the number that will be added or sbutracted to the actual temp
-    let personalTemp = Data[dataLength].personalTemp;
     // farrenheit
     let fahrenheit = Math.floor(data.temp * 1.8) + 32;
-    // adjusted temp using personal temp
-    let adjustedTemp = fahrenheit + personalTemp;
     // feels like temp to fahrenheit
     let feelsLikeFahreneheit = Math.floor(data.feelsLike * 1.8) + 32;
 
     // clothing check taking into account personal temp
-    clothingCheck(adjustedTemp);
+    clothingCheck(fahrenheit);
     // update UI
     // add geography
     locationDiv.innerHTML = `<h3> the weather in ${data.city}, ${data.country} is: </h3> `;
@@ -132,26 +120,6 @@ async function useServerData() {
     iconDiv.innerHTML = "";
     clothingtDiv.innerHTML = "";
     feelsLikeDiv.innerHTML = "";
-  }
-}
-
-// converting radio value to an integer
-
-function convertStringToInteger(string) {
-  return parseInt(string);
-}
-
-// testing radio to see which one is highlighted based on id
-function testRadioValue(radioclass) {
-  var ele = document.getElementsByClassName(radioclass);
-  console.log("ele is" + ele);
-
-  for (i = 0; i < ele.length; i++) {
-    if ((ele[i].type = "radio")) {
-      if (ele[i].checked) {
-        return convertStringToInteger(ele[i].value);
-      }
-    }
   }
 }
 
@@ -248,15 +216,11 @@ function runProgram() {
     clothingtDiv.innerHTML = "";
     feelsLikeDiv.innerHTML = "";
   } else {
-    // get results of the personal temp feeling radio
-    let enteredPersonalTemp = testRadioValue("personal-temp");
     // post the weather to the server
     getWeatherData(baseURL, enteredZipcode, APIKey).then((data) => {
       postData("/add", {
         // weather data
         data: data,
-        // personal info
-        personalTemp: enteredPersonalTemp,
       });
       // get the server data back and use it
       useServerData();

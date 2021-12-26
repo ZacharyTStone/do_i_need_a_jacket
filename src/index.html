@@ -40,38 +40,7 @@
           placeholder="enter zip code here"
         />
       </div>
-      <div class="section personal-temp-div">
-        <div>
-          <input
-            type="radio"
-            class="personal-temp form-check-input"
-            value="0"
-            name="personal-temp-radio"
-            checked="checked"
-          />
-          <label for="personal-temp-normal" class="form-check-label"
-            >I don't mind being hot or cold</label
-          ><br />
-          <input
-            type="radio"
-            class="personal-temp form-check-input"
-            value="3"
-            name="personal-temp-radio"
-          />
-          <label for="personal-temp-hot" class="form-check-label"
-            >I often feel hot</label
-          ><br />
-          <input
-            type="radio"
-            class="personal-temp form-check-input"
-            value="-3"
-            name="personal-temp-radio"
-          />
-          <label for="personal-temp-cold" class="form-check-label"
-            >I often feel cold</label
-          >
-        </div>
-      </div>
+
       <div class="section button-div">
         <button
           class="btn btn-primary"
@@ -116,6 +85,7 @@
               <div id="entryHolder">
                 <div id="clothing"></div>
                 <div id="location"></div>
+
                 <div class="weather-info-div">
                   <ul>
                     <li id="temp"></li>
@@ -129,6 +99,17 @@
             </div>
           </div>
           <div class="modal-footer">
+            <div>
+              <p>
+                clothing estimates based on
+                <a
+                  href="https://www.washingtonpost.com/weather/2018/10/30/weather-is-what-you-wear-unpacking-clothing-connected-different-climate-conditions-united-states/"
+                  target="_blank"
+                  >this</a
+                >
+                Washington Press article
+              </p>
+            </div>
             <button
               type="button"
               class="btn btn-secondary"
