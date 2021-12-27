@@ -185,8 +185,23 @@ function clothingCheck(farenheitTemp) {
 
 let zipcodeForm = document.getElementById("zip");
 zipcodeForm.addEventListener("keyup", function () {
-  if (document.getElementById("zip").value.length == 5) {
+  //test to see if the user has entered 5 numbers(no characters allowed)
+  if (
+    document.getElementById("zip").value.length === 5 &&
+    document.getElementById("zip").value.match(/^[0-9]+$/)
+  ) {
     runProgram();
+  } else if (
+    document.getElementById("zip").value.length === 5 &&
+    !document.getElementById("zip").value.match(/^[0-9]+$/)
+  ) {
+    locationDiv.innerHTML = "<h1> Please enter only numbers. </h1>";
+    temperatureDiv.innerHTML = "";
+    humidityDiv.innerHTML = "";
+    weatherDiv.innerHTML = "";
+    iconDiv.innerHTML = "";
+    clothingtDiv.innerHTML = "";
+    feelsLikeDiv.innerHTML = "";
   }
 });
 
