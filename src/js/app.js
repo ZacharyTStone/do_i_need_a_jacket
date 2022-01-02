@@ -19,6 +19,20 @@ const feelsLikeDiv = document.getElementById("feelslike");
 
 // helper functions
 
+//santize the input
+function sanitize(string) {
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#x27;",
+    "/": "&#x2F;",
+  };
+  const reg = /[&<>"'/]/gi;
+  return string.replace(reg, (match) => map[match]);
+}
+
 // Get weather info from API
 
 async function getWeatherData(baseURL, zipcode, APIKey) {
@@ -191,10 +205,7 @@ zipcodeForm.addEventListener("keyup", function () {
     document.getElementById("zip").value.match(/^[0-9]+$/)
   ) {
     runProgram();
-  } else if (
-    document.getElementById("zip").value.length === 5 &&
-    !document.getElementById("zip").value.match(/^[0-9]+$/)
-  ) {
+  } else if (!document.getElementById("zip").value.match(/^[0-9]+$/)) {
     locationDiv.innerHTML = "<h1> Please enter only numbers. </h1>";
     temperatureDiv.innerHTML = "";
     humidityDiv.innerHTML = "";
@@ -208,7 +219,7 @@ zipcodeForm.addEventListener("keyup", function () {
 // add event listner to remove data on any requests less than 5 characters
 generateButton.addEventListener("click", function () {
   if (document.getElementById("zip").value.length !== 5) {
-    locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
+    locationDiv.innerHTML = "<h1> Please enter 5 digits. </h1>";
     temperatureDiv.innerHTML = "";
     humidityDiv.innerHTML = "";
     weatherDiv.innerHTML = "";
@@ -219,8 +230,11 @@ generateButton.addEventListener("click", function () {
 });
 
 function runProgram() {
-  // inputs
+  // input
   let enteredZipcode = document.getElementById("zip").value;
+  //santize input
+  enteredZipcode = sanitize(enteredZipcode);
+  console.log(enteredZipcode);
   // test zip code
   if (enteredZipcode.length !== 5) {
     locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
