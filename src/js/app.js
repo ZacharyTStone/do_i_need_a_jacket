@@ -219,7 +219,7 @@ zipcodeForm.addEventListener("keyup", function () {
 // add event listner to remove data on any requests less than 5 characters
 generateButton.addEventListener("click", function () {
   if (document.getElementById("zip").value.length !== 5) {
-    locationDiv.innerHTML = "<h1> Please enter 5 digits. </h1>";
+    locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
     temperatureDiv.innerHTML = "";
     humidityDiv.innerHTML = "";
     weatherDiv.innerHTML = "";
