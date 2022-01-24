@@ -234,7 +234,6 @@ function runProgram() {
   let enteredZipcode = document.getElementById("zip").value;
   //santize input
   enteredZipcode = sanitize(enteredZipcode);
-  console.log(enteredZipcode);
   // test zip code
   if (enteredZipcode.length !== 5) {
     locationDiv.innerHTML = "<h1> Couldn't find that. Sorry </h1>";
